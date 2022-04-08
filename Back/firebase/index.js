@@ -1,14 +1,17 @@
 const admin = require("firebase-admin");
+const { getAuth } = require('firebase-admin/auth') ;
+//const { initializeApp } = require('firebase-admin/app');
 const serviceAccount = require("./firebaseIn.json");
 
 
 /* This is the initialization of the firebase app. */
-admin.initializeApp({
+const app =  admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
   });
   
 /*  initialization of dataBase (Firestore)  */
 const db = admin.firestore(); 
+ 
 
 
 /**
@@ -65,8 +68,14 @@ return data
 }
 
 
+async function valideToken (idToken) {
+ 
+ 
+const result = await getAuth().verifyIdToken(idToken)
+   
+return result
+}
 
 
 
-
-module.exports = {setData, getData, deleteData, updateData}
+module.exports = {setData, getData, deleteData, updateData, valideToken}

@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const {setData, getData, deleteData, updateData} = require('./firebase/index')
 const {handleError} = require('./middleware/errors')
 const app = express()
@@ -9,7 +10,7 @@ const bodyParser = require('body-parser');
 
 
 app.use(bodyParser.json());
-
+app.use(cors());
 
 
 
@@ -60,13 +61,13 @@ app.post('/:collection', handleError,  (req, res) => {
 })
 
 /* This is a middleware that will catch any error that occurs in the app. */
-app.delete('/', (req, res) => {
+app.delete('/', handleError, (req, res) => {
   res.status(500)
   res.json('Please select available collection')
 
 })
 
-app.delete('/:collection/:doc',  async (req, res) => {
+app.delete('/:collection/:doc', handleError, async (req, res) => {
 
   const data = deleteData(req.params.collection, req.params.doc)
 
@@ -75,13 +76,13 @@ app.delete('/:collection/:doc',  async (req, res) => {
 })
 
 /* This is a middleware that will catch any error that occurs in the app. */
-app.put('/', (req, res) => {
+app.put('/',  (req, res) => {
   res.status(500)
   res.json('Please select available collection / id')
 
 })
 
-app.put('/:collection/:doc',  async (req, res) => {
+app.put('/:collection/:doc', handleError,  async (req, res) => {
 
   const data = await updateData(req.params.collection, req.params.doc, req.body)
 
@@ -111,4 +112,3 @@ port. */
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
