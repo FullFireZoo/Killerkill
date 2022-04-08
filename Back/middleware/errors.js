@@ -11,7 +11,6 @@ const {valideToken} = require('../firebase/index')
  */
 async function handleError(req, res, next){
   
- 
 
  if(Object.keys(req.body).length === 0){
   res.status(500)
