@@ -45,7 +45,7 @@ if(req.headers.hasOwnProperty('authorization')){
 
 } else{
   res.status(403)
-  res.json(token)
+  res.json('Please provide a valid token')
 }
  
     

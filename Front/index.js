@@ -24,9 +24,9 @@ const firebaseConfig = {
 // })
 
 
-async function usersUid(){
-    const uid = await createUser("users1quatre@gmail.com",'test123')
-    console.log(uid);
-    saveContent("users", {uid, "niveau":1})
-} 
-usersUid()
+// async function usersUid(){
+//     const uid = await createUser("users1quatre@gmail.com",'test123')
+//     console.log(uid);
+//     saveContent("users", {uid, "niveau":1})
+// } 
+// usersUid()
